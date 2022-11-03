@@ -36,11 +36,16 @@ export class PrismaProductService {
         return this.prisma.products.update({where: {id}, 
             data: {
                 ...updateProductDetails,
-                date_created: new Date()
+                date_updated: new Date()
             }})
     }
 
-    deleteProduct(id: number) {
-        return this.prisma.products.delete({ where: {id} })
+    async deleteProduct(id: number) {
+        try {
+            const deleted = await this.prisma.products.delete({ where: {id} })
+            return {message: "Product successfully deleted!", data: deleted}
+        } catch (error) {
+            return {message: "No data to delete!", data: error}
+        }
     }
 }

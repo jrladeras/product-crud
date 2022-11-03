@@ -1,3 +1,4 @@
+import { UpdateProductDto } from './../../typeorm_product/validator/product.dto';
 import { Products } from './../../../entities/typeorm/products';
 import { UpdatePriceDto } from './../../typeorm_product/validator/price.dto';
 import { CreateProductDto } from '../../typeorm_product/validator/product.dto';
@@ -27,7 +28,7 @@ export class PrismaProductController{
     @Put(':id')
     updateProduct(
         @Param('id', ParseIntPipe) id: number,
-        @Body() updateProductDetails: UpdatePriceDto
+        @Body() updateProductDetails: UpdateProductDto
     ) {
         return this.productService.updateProduct(id, updateProductDetails);
     }
